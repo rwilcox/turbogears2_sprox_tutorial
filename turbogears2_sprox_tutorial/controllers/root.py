@@ -8,8 +8,14 @@ from turbogears2_sprox_tutorial.lib.base import BaseController
 from turbogears2_sprox_tutorial.model import DBSession, metadata
 from turbogears2_sprox_tutorial.controllers.error import ErrorController
 
+from turbogears2_sprox_tutorial import model
+
 __all__ = ['RootController']
 
+from catwalk.tg2 import Catwalk
+
+class UnSecuredCatwalk(Catwalk):
+    allow_only = None
 
 class RootController(BaseController):
     """
@@ -27,6 +33,7 @@ class RootController(BaseController):
     """
 
     error = ErrorController()
+    catwalk = UnSecuredCatwalk(model, DBSession)
 
     @expose('turbogears2_sprox_tutorial.templates.index')
     def index(self):
