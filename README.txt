@@ -16,7 +16,8 @@ References:
       How to customize your form's action, how to do basic customization of the form
   * http://sprox.org/tutorials/form.html
       From basics, to customization, to using the builtin Dojo support, custom fields, and validators.
-
+  * http://formencode.org/modules/validators.html#module-formencode.validators
+      validators for FormEncode (what Sprox uses on the back end...)
 
 This sample application has the following domain: it's a newsletter sign up application.
 
