@@ -27,6 +27,12 @@ newsletter_validator = Schema(chained_validators = (FieldsMatch("email_address",
 class UnSecuredCatwalk(Catwalk):
     allow_only = None
 
+# The simpliest Sprox form that can exist: it figures out field names, orderings and puts together basic validation
+# (The magic of sprox is that it fills out the fields!)
+# Commented out here to show the evolution of this form class: from this basic form to a super customized one you see below
+#class NewsletterAddForm(AddRecordForm):
+#    __model__ = NewsletterSubscriber                            # required
+
 class NewsletterAddForm(AddRecordForm):
     """A form that is an Add-A-Record form. Sprox has classes for all the CRUD operations"""
     __model__ = NewsletterSubscriber                            # required
