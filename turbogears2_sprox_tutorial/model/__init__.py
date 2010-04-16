@@ -59,3 +59,4 @@ def init_model(engine):
     #mapper(Reflected, t_reflected)
 
 # Import your model modules here.
+from turbogears2_sprox_tutorial.model.newsletter_subscriber import NewsletterSubscriber
