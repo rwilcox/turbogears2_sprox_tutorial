@@ -75,5 +75,15 @@ class RootController(BaseController):
     def data(self, **kw):
         """This method showcases how you can use the same controller for a data page and a display page"""
         return dict(params=kw)
+    
+    @expose("turbogears2_sprox_tutorial.templates.newsletter_form")
+    def newsletter(self, **kw):
+        """Handle the newsletter sign up form page"""
+        tmpl_context.widget = new_newsletter_sub_form
+        # tmpl_context is a special variable in Turbogears. I'm a little
+        # confused as to what it does, and why we can't just pass the Sprox form
+        # However, the template on the other side expects to get the form through the tmpl_context
+        return dict(page="newsletter signup", value=kw)
+    
 
 
