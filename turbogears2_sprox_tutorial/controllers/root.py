@@ -92,5 +92,16 @@ class RootController(BaseController):
         # However, the template on the other side expects to get the form through the tmpl_context
         return dict(page="newsletter signup", value=kw)
     
+    # This is the reason why we needed to instantiate the Sprox form (instead of instantiating in the action
+    # like you might expect): we need to use that same form instance to validate
+    # the user's input
+    @validate(new_newsletter_sub_form, error_handler=newsletter)
+    @expose()
+    def post_newsletter(self, full_name, email_address, **kw):
+        subber = NewsletterSubscriber(full_name=full_name, email_address=email_address)
+        DBSession.add(subber)
+        flash("Thank you for subscribing to our newsletter")
+        redirect( url("/index") )
+
 
 
