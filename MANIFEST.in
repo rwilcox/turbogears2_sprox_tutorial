@@ -1,0 +1,4 @@
+recursive-include turbogears2_sprox_tutorial/public *
+include turbogears2_sprox_tutorial/public/favicon.ico
+recursive-include turbogears2_sprox_tutorial/i18n *
+recursive-include turbogears2_sprox_tutorial/templates *
