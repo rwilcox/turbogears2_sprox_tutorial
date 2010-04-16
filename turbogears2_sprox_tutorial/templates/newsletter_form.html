@@ -14,6 +14,8 @@
 <body>
 <div>
   ${tmpl_context.widget(value, action=tg.url('/post_newsletter'))}
+  <!-- NOTE the action=... bit in our template code above. This is what tells the Sprox widget
+  to post to another URL: by default it posts back to this page!!! -->
 </div>
 </body>
 </html>
