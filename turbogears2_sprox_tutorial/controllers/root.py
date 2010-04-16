@@ -11,7 +11,7 @@ from turbogears2_sprox_tutorial.controllers.error import ErrorController
 from turbogears2_sprox_tutorial import model
 
 from formencode import Schema
-from formencode.validators import FieldsMatch
+from formencode.validators import FieldsMatch, Email, NotEmpty
 from tw.forms import TextField
 from sprox.formbase import AddRecordForm
 
@@ -31,7 +31,14 @@ class NewsletterAddForm(AddRecordForm):
     """A form that is an Add-A-Record form. Sprox has classes for all the CRUD operations"""
     __model__ = NewsletterSubscriber                            # required
     __omit_fields__ = ['id']                                    # skip display for the ID field (would be disabled anyway)
-    __require_fields = ["full_name", "email_address"]           # auto validation of these fields
+    #__require_fields = ["full_name", "email_address"]           # auto validation of these fields
+    # auto validation doesn't work when we override __base_validator__
+    
+    email_address = Email()
+    # formencode has an Email validator. We override the default validation behavor of the control to provide special
+    # validation
+    
+    full_name = NotEmpty()                                      # explicitly set this validation up because __require_fields__ doesn't work in our case
     verify_email_address = TextField("verify_email_address")    #add a non-model field, which our validator will compare
     __base_validator__ = newsletter_validator                   # hook up our special validator to make sure two fields match
 
