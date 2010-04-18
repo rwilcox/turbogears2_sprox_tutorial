@@ -21,7 +21,8 @@ References:
 
 This sample application has the following domain: it's a newsletter sign up application.
 
-This is also a good sample application for Turbogears
+This is also a good sample application for Turbogears (http://turbogears.org/).
+
 
 Standard information follows:
 ===========================================================
