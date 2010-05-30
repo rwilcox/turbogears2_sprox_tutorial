@@ -60,6 +60,12 @@ list_newsletters = NewsletterList(DBSession)
 
 class NewsletterListFiller(TableFiller):
     __model__ = NewsletterSubscriber
+    def __actions__(self, obj):
+        """This function overrides the normal action defaults for a table,
+        or rather table row for a record"""
+        return "<span><a href='/newsletter_show/%d'>Show</a></span>" % obj.id
+    
+
 list_filler_for_newsletters = NewsletterListFiller(DBSession)
 
 
