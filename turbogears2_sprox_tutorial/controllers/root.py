@@ -15,7 +15,7 @@ from formencode.validators import FieldsMatch, Email, NotEmpty
 from tw.forms import TextField
 from sprox.formbase import AddRecordForm
 from sprox.recordviewbase import RecordViewBase
-from sprox.fillerbase import TableFiller
+from sprox.fillerbase import TableFiller, RecordFiller
 from sprox.tablebase import TableBase
 
 from turbogears2_sprox_tutorial.model.newsletter_subscriber import NewsletterSubscriber
@@ -52,6 +52,15 @@ class NewsletterAddForm(AddRecordForm):
     __base_validator__ = newsletter_validator                   # hook up our special validator to make sure two fields match
 
 new_newsletter_sub_form = NewsletterAddForm(DBSession)
+
+
+class NewsletterViewForm(RecordViewBase):
+    __model__ = NewsletterSubscriber
+view_newsletter_form = NewsletterViewForm(DBSession)
+
+class NewsletterViewFiller(RecordFiller):
+    __model__ = NewsletterSubscriber
+show_newsletter = NewsletterViewFiller(DBSession)
 
 
 class NewsletterList(TableBase):
@@ -122,6 +131,14 @@ class RootController(BaseController):
         """Show every newsletter subscriber"""
         tmpl_context.widget = list_newsletters
         return dict( page="Newsletter List", value=list_filler_for_newsletters.get_value() )
+    
+    @expose("turbogears2_sprox_tutorial.templates.newsletter_show")
+    def newsletter_show(self, id):
+        #subscriber = DBSession.query(NewsletterSubscriber).find_by(id=id)
+        tmpl_context.widget = view_newsletter_form
+        return dict(  page="Newsletter Show",
+            value=dict( show_newsletter.get_value({'id':id}) )
+        )
     
     # This is the reason why we needed to instantiate the Sprox form (instead of instantiating in the action
     # like you might expect): we need to use that same form instance to validate
